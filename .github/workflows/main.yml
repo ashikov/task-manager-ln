@@ -4,7 +4,7 @@ on: [pull_request, push]
 
 env:
   DB_CONNECTION: pgsql
-  DB_HOST: localhost
+  DB_HOST: db
   DB_PORT: 5432
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: password
