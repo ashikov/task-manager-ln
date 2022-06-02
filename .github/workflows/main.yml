@@ -1,0 +1,41 @@
+name: main-workflow
+
+on: [pull_request, push]
+
+env:
+  DB_CONNECTION: pgsql
+  DB_HOST: localhost
+  DB_PORT: 5432
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: password
+  POSTGRES_DB: postgres
+
+jobs:
+  build:
+
+    env:
+      DB_HOST: localhost
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+
+    - name: PHP Security Checker
+      uses: symfonycorp/security-checker-action@v2
+
+    - name: Setup project
+      run: make setup
+
+    - name: Check lint
+      run: make lint
+
+    - name: Execute tests
+      run: make test
