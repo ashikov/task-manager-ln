@@ -2,16 +2,16 @@ name: main-workflow
 
 on: [pull_request, push]
 
-env:
-  DB_CONNECTION: pgsql
-  DB_HOST: db
-  DB_PORT: 5432
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: password
-  POSTGRES_DB: postgres
-
 jobs:
   build:
+    env:
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_PORT: 5432
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+
     runs-on: ubuntu-latest
 
     services:
