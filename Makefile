@@ -28,3 +28,9 @@ db-prepare:
 
 setup: env-prepare install key db-prepare
 	npm run development
+
+lint:
+	composer exec phpcs -v
+
+test-coverage:
+	php artisan test --coverage-clover build/logs/clover.xml

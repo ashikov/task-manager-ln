@@ -16,3 +16,12 @@ compose-start:
 
 compose-clear:
 	docker-compose down -v --remove-orphans || true
+
+compose-bash:
+	docker-compose run --rm app bash
+
+ci:
+	docker-compose -f docker-compose.ci.yml -p task-manager-ci build ${BUILD_ARGS}
+	docker-compose -f docker-compose.ci.yml -p task-manager-ci run app make setup
+	docker-compose -f docker-compose.ci.yml -p task-manager-ci up --abort-on-container-exit
+	docker-compose -f docker-compose.ci.yml -p task-manager-ci down -v --remove-orphans
