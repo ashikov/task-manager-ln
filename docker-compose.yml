@@ -1,0 +1,43 @@
+version: "3.7"
+services:
+
+    app:
+      build:
+        args:
+          user: tmanager
+          uid: 1000
+          gid: 1000
+        context: .
+        dockerfile: Dockerfile
+      image: tmanager
+      container_name: tmanager-app
+      working_dir: /app
+      volumes:
+        - ./:/app:delegated
+        - ~/.bash_history:/home/sicp/.bash_history:delegated
+      depends_on:
+        - db
+      ports:
+        - "8000:8000"
+      command: ["make", "start-app"]
+
+    frontend:
+      build: .
+      volumes:
+        - .:/app:delegated
+      command: ["make", "start-frontend"]
+
+    db:
+      image: postgres:14.4-alpine
+      container_name: tmanager-db
+      environment:
+        POSTGRES_DATABASE: ${DB_DATABASE}
+        POSTGRES_PASSWORD: ${DB_PASSWORD}
+        POSTGRES_USER: ${DB_USERNAME}
+        SERVICE_TAGS: dev
+        SERVICE_NAME: pgsql
+      volumes:
+        - tmanager-pgdata:/var/lib/postgresql/data
+
+volumes:
+  tmanager-pgdata:
