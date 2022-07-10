@@ -33,4 +33,4 @@ lint:
 	composer exec phpcs -v
 
 test-coverage:
-	XDEBUG_MODE=coverage composer exec phpunit tests -- --coverage-clover build/logs/clover.xml
+	composer exec phpunit tests -- --coverage-clover build/logs/clover.xml
