@@ -33,4 +33,4 @@ lint:
 	composer exec phpcs -v
 
 test-coverage:
-	php artisan test --coverage-clover build/logs/clover.xml
+	composer phpunit tests -- --coverage-clover build/logs/clover.xml
