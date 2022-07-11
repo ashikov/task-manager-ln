@@ -1,23 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
+        <div class="p-5 mb-4 bg-light border rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold">@lang('views.home.header')</h1>
+                <p class="col-md-8 fs-4">@lang('views.home.description')</p>
+                <a href="https://ashikov.ru" class="btn btn-primary btn-lg" type="button" target="_blank">@lang('views.home.learn_more')</a>
             </div>
         </div>
-    </div>
-</div>
 @endsection
