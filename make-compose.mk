@@ -20,6 +20,9 @@ compose-clear:
 compose-bash:
 	docker-compose run --rm app bash
 
+compose-test:
+	docker-compose run app make test
+
 ci:
 	docker-compose -f docker-compose.ci.yml -p task-manager-ci build ${BUILD_ARGS}
 	docker-compose -f docker-compose.ci.yml -p task-manager-ci run app make setup
