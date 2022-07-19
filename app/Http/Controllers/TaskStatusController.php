@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class TaskStatusController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(TaskStatus::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -49,16 +55,6 @@ class TaskStatusController extends Controller
         return redirect()->route('task_statuses.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\TaskStatus  $taskStatus
-     * @return \Illuminate\Http\Response
-     */
-    public function show(TaskStatus $taskStatus)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -68,7 +64,7 @@ class TaskStatusController extends Controller
      */
     public function edit(TaskStatus $taskStatus)
     {
-        //
+        return view('task_status.edit', compact('taskStatus'));
     }
 
     /**
@@ -80,7 +76,20 @@ class TaskStatusController extends Controller
      */
     public function update(Request $request, TaskStatus $taskStatus)
     {
-        //
+        $id = $taskStatus->id;
+        $taskStatus = TaskStatus::find($id);
+
+        abort_unless($taskStatus, 404);
+
+        $validated = $this->validate($request, [
+            'name' => 'required|unique:task_statuses|max:255'
+        ]);
+
+        $taskStatus->fill($validated);
+        $taskStatus->save();
+
+        flash(__('flashes.statuses.updated'))->success();
+        return redirect()->route('task_statuses.index');
     }
 
     /**
@@ -91,6 +100,14 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $taskStatus)
     {
-        //
+        $id = $taskStatus->id;
+        $taskStatus = TaskStatus::find($id);
+
+        abort_unless($taskStatus, 404);
+
+        $taskStatus->delete();
+
+        flash(__('flashes.statuses.deleted'))->success();
+        return redirect()->route('task_statuses.index');
     }
 }
