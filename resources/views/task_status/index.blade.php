@@ -5,7 +5,7 @@
 
     @can('create', App\Models\TaskStatus::class)
         <a href="{{ route('task_statuses.create') }}" class="btn btn-primary">
-            @lang('views.task_status.create_button')
+            @lang('views.task_status.index.create_button')
         </a>
     @endcan
 
@@ -15,7 +15,9 @@
                 <th>@lang('views.task_status.index.id')</th>
                 <th>@lang('views.task_status.index.name')</th>
                 <th>@lang('views.task_status.index.created_at')</th>
-                <th>@lang('views.task_status.index.actions')</th>
+                @can('seeActions', App\Models\TaskStatus::class)
+                    <th>@lang('views.task_status.index.actions')</th>
+                @endcan
             </tr>
         </thead>
         @foreach($taskStatuses as $status)
