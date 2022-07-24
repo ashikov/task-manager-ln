@@ -68,4 +68,14 @@ class TaskStatusPolicy
     {
         return Auth::check();
     }
+
+    /**
+     * Determine whether the user can view actions column in table.
+     *
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function seeActions()
+    {
+        return Auth::check();
+    }
 }
