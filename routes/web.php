@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\TaskStatusController;
+use App\Http\Controllers\{
+    TaskStatusController,
+    TaskController
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +28,7 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('task_statuses', TaskStatusController::class);
+Route::resources([
+    'task_statuses' => TaskStatusController::class,
+    'tasks' => TaskController::class
+]);

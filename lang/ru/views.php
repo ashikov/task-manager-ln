@@ -36,5 +36,51 @@ return [
                 'create' => 'Создать'
             ]
         ]
-    ]
+    ],
+    'task' => [
+        'index' => [
+            'header' => 'Задачи',
+            'id' => 'ID',
+            'name' => 'Имя',
+            'created_at' => 'Дата создания',
+            'actions' => 'Действия',
+            'delete_confirmation' => 'Вы уверены?',
+            'delete' => 'Удалить',
+            'edit' => 'Изменить',
+            'create_button' => 'Создать задачу',
+            'status' => 'Статус',
+            'creator' => 'Автор',
+            'assigned_to' => 'Исполнитель'
+        ],
+        'edit' => [
+            'form_header' => 'Изменение задачи',
+            'labels' => [
+                'name' => 'Имя',
+                'description' => 'Описание',
+                'status_id' => 'Статус',
+                'assigned_to_id' => 'Исполнитель'
+            ],
+            'buttons' => [
+                'update' => 'Обновить'
+            ]
+        ],
+        'create' => [
+            'form_header' => 'Создать задачу',
+            'labels' => [
+                'name' => 'Имя',
+                'description' => 'Описание',
+                'status_id' => 'Статус',
+                'assigned_to_id' => 'Исполнитель'
+            ],
+            'buttons' => [
+                'create' => 'Создать'
+            ]
+        ],
+        'show' => [
+            'header' => 'Просмотр задачи: :name',
+            'name' => 'Имя',
+            'description' => 'Описание',
+            'status_id' => 'Статус'
+        ]
+    ],
 ];

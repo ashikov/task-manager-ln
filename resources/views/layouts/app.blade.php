@@ -32,6 +32,11 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
+                            <a class="nav-link " href="{{ route('tasks.index') }}">
+                                @lang('layouts.app.tasks')
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link " href="{{ route('task_statuses.index') }}">
                                 @lang('layouts.app.task_statuses')
                             </a>

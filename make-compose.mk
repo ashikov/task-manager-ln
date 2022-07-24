@@ -1,6 +1,6 @@
 BUILD_ARGS:= --build-arg UID=$(shell id -u) --build-arg GID=$(shell id -u)
 
-compose: compose-clear compose-build compose-setup compose-start
+compose: compose-clear compose-setup compose-start
 
 compose-clear:
 	docker-compose down -v --remove-orphans || true
