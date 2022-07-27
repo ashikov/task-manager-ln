@@ -104,6 +104,12 @@ class TaskStatusController extends Controller
         $taskStatus = TaskStatus::find($id);
 
         abort_unless($taskStatus, 404);
+
+        if ($taskStatus->tasks()->exists()) {
+            flash(__('flashes.task_status.delete.error'))->error();
+            return back();
+        }
+
         $taskStatus->delete();
 
         flash(__('flashes.statuses.deleted'))->success();

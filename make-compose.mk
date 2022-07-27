@@ -21,7 +21,7 @@ compose-bash:
 	docker-compose run --rm app bash
 
 compose-test:
-	docker-compose run app make test
+	docker-compose run app make test lint
 
 ci:
 	docker-compose -f docker-compose.ci.yml -p task-manager-ci build ${BUILD_ARGS}
