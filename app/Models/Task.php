@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 use App\Models\{
     TaskStatus,
-    User
+    User,
+    Label
 };
 
 class Task extends Model
@@ -36,6 +37,11 @@ class Task extends Model
     public function assignedTo(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function labels()
+    {
+        return $this->belongsToMany(Label::class)
     }
 
 }
