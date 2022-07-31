@@ -3,7 +3,7 @@
     "scripts": {
         "dev": "vite --host",
         "build": "vite build",
-        "development": "npm run dev"
+        "development": "npm run build"
     },
     "devDependencies": {
         "@popperjs/core": "^2.10.2",
