@@ -10,6 +10,10 @@ use App\Models\{
 };
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\QueryBuilder\{
+    QueryBuilder,
+    AllowedFilter
+};
 
 class TaskController extends Controller
 {
@@ -24,10 +28,27 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::paginate(10);
-        return view('task.index', compact('tasks'));
+
+        $tasks = QueryBuilder::for(Task::class)
+            ->allowedFilters([
+                'name',
+                AllowedFilter::exact('status_id'),
+                AllowedFilter::exact('created_by_id'),
+                AllowedFilter::exact('assigned_to_id'),
+            ])
+            ->paginate(10);
+
+        $taskStatusesForFilterForm = TaskStatus::pluck('name', 'id');
+        $usersForFilterForm = User::pluck('name', 'id');
+        $filterQueryString = $request->input('filter');
+        return view('task.index', compact(
+            'tasks',
+            'taskStatusesForFilterForm',
+            'usersForFilterForm',
+            'filterQueryString'
+        ));
     }
 
     /**

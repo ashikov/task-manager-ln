@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "fakerphp/faker": "^1.9.1",
         "guzzlehttp/guzzle": "^7.2",
         "laracasts/flash": "^3.2",
         "laravel/framework": "^9.19.0",
@@ -14,7 +15,7 @@
         "laravel/ui": "^3.4",
         "laravelcollective/html": "^6.3",
         "rollbar/rollbar-laravel": "~7.0",
-        "fakerphp/faker": "^1.9.1"
+        "spatie/laravel-query-builder": "^5.0"
     },
     "require-dev": {
         "laravel/breeze": "^1.10",

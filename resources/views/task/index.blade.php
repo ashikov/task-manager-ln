@@ -3,6 +3,25 @@
 @section('content')
     <h1 class="mb-5">@lang('views.task.index.header')</h1>
 
+    <div>
+        {{ Form::open(['route' => 'tasks.index', 'method' => 'get']) }}
+        <div class="row g-1">
+            <div class="col">
+                {{ Form::select('filter[status_id]', $taskStatusesForFilterForm, Arr::get($filterQueryString, 'status_id', ''), ['class' => 'form-select me-2', 'placeholder' => __('views.task.index.placeholders.filter.status_id')]) }}
+            </div>
+            <div class="col">
+                {{ Form::select('filter[created_by_id]', $usersForFilterForm, Arr::get($filterQueryString, 'created_by_id', ''), ['class' => 'form-select me-2', 'placeholder' => __('views.task.index.placeholders.filter.created_by_id')]) }}
+            </div>
+            <div class="col">
+                {{ Form::select('filter[assigned_to_id]', $usersForFilterForm, Arr::get($filterQueryString, 'assigned_to_id', ''), ['class' => 'form-select me-2', 'placeholder' => __('views.task.index.placeholders.filter.assigned_to_id')]) }}
+            </div>
+            <div class="col">
+                {{ Form::submit(__('views.task.index.submits.filter'), ['class' => 'btn btn-outline-primary me-2']) }}
+            </div>
+            {{ Form::close() }}
+        </div>
+    </div>
+
     @can('create', App\Models\Task::class)
         <a href="{{ route('tasks.create') }}" class="btn btn-primary">
             @lang('views.task.index.create_button')
