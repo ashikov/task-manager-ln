@@ -7,7 +7,8 @@ use Illuminate\Database\Seeder;
 use App\Models\{
     TaskStatus,
     Task,
-    User
+    User,
+    Label
 };
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
         User::factory(5)->create();
         TaskStatus::factory(5)->create();
         Task::factory(5)->create();
+        Label::factory(5)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

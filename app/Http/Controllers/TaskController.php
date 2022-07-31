@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\{
     Task,
     TaskStatus,
-    User
+    User,
+    Label
 };
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +39,8 @@ class TaskController extends Controller
     {
         $taskStatuses = TaskStatus::all();
         $users = User::all();
-        return view('task.create', compact('taskStatuses', 'users'));
+        $labels = Label::all();
+        return view('task.create', compact('taskStatuses', 'users', 'labels'));
     }
 
     /**
@@ -60,7 +62,7 @@ class TaskController extends Controller
 
         $task = $currentUser->createdTasks()->make($validated);
         $task->save();
-        flash(__('flashes.task.store.success'))->success();
+        flash(__('flashes.tasks.store.success'))->success();
 
         return redirect()->route('tasks.index');
     }
@@ -86,7 +88,8 @@ class TaskController extends Controller
     {
         $taskStatuses = TaskStatus::all();
         $users = User::all();
-        return view('task.edit', compact('task', 'taskStatuses', 'users'));
+        $labels = Label::all();
+        return view('task.edit', compact('task', 'taskStatuses', 'users', 'labels'));
     }
 
     /**
@@ -104,9 +107,14 @@ class TaskController extends Controller
             'assigned_to_id' => 'nullable|integer',
             'status_id' => 'required|integer',
         ]);
+
+        $labels = collect($request->input('labels'))
+            ->filter(fn($label) => $label !== null);
+        $task->labels()->sync($labels);
+
         $task->fill($validated);
         $task->save();
-        flash(__('flashes.task.update.success'))->success();
+        flash(__('flashes.tasks.updated'))->success();
 
         return redirect()->route('tasks.index');
 
@@ -124,8 +132,10 @@ class TaskController extends Controller
         $task = Task::find($id);
 
         abort_unless($task, 404);
+
+        $task->labels()->detach();
         $task->delete();
-        flash(__('flashes.task.destroy.success'))->success();
+        flash(__('flashes.tasks.deleted'))->success();
 
         return redirect()->route('tasks.index');
     }

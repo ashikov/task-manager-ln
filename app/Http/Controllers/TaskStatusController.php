@@ -50,7 +50,7 @@ class TaskStatusController extends Controller
         $taskStatus = new TaskStatus();
         $taskStatus->fill($validated);
         $taskStatus->save();
-        flash(__('flashes.task_status.store.success'))->success();
+        flash(__('flashes.statuses.store.success'))->success();
 
         return redirect()->route('task_statuses.index');
     }
@@ -106,7 +106,7 @@ class TaskStatusController extends Controller
         abort_unless($taskStatus, 404);
 
         if ($taskStatus->tasks()->exists()) {
-            flash(__('flashes.task_status.delete.error'))->error();
+            flash(__('flashes.statuses.delete.error'))->error();
             return back();
         }
 

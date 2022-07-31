@@ -41,6 +41,11 @@
                                 @lang('layouts.app.task_statuses')
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="{{ route('labels.index') }}">
+                                @lang('layouts.app.labels')
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -22,6 +22,9 @@
         {{ Form::label('assigned_to_id', __('views.task.create.labels.assigned_to_id')) }}
         {{ Form::select('assigned_to_id', $users->pluck('name', 'id'), null, ['class' => 'form-control', 'placeholder' => '----------'] )}}
 
+        {{Form::label('labels', __('views.task.create.labels.assigned_to_id'))}}
+        {{Form::select('labels', $labels->pluck('name', 'id'), null, ['placeholder' => '', 'multiple' => 'multiple', 'name' => 'labels[]', 'class' => 'form-control'])}}
+
 
         {{ Form::submit(__('views.task.create.buttons.create'), ['class' => 'btn btn-primary mt-3']) }}
     {{ Form::close() }}

@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\{
     TaskStatusController,
-    TaskController
+    TaskController,
+    LabelController
 };
 
 /*
@@ -30,5 +31,6 @@ require __DIR__.'/auth.php';
 
 Route::resources([
     'task_statuses' => TaskStatusController::class,
-    'tasks' => TaskController::class
+    'tasks' => TaskController::class,
+    'labels' => LabelController::class
 ]);

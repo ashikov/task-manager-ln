@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class LabelController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Label::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,9 @@ class LabelController extends Controller
      */
     public function index()
     {
-        //
+        $labels = Label::paginate(10);
+
+        return view('label.index', compact('labels'));
     }
 
     /**
@@ -24,7 +32,7 @@ class LabelController extends Controller
      */
     public function create()
     {
-        //
+        return view('label.create');
     }
 
     /**
@@ -35,18 +43,17 @@ class LabelController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $validated = $this->validate($request, [
+            'name' => 'required|unique:labels|max:255',
+            'description' => 'max:500'
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Label  $label
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Label $label)
-    {
-        //
+        $label = new Label();
+        $label->fill($validated);
+        $label->save();
+        flash(__('flashes.labels.store.success'))->success();
+
+        return redirect()->route('labels.index');
     }
 
     /**
@@ -57,7 +64,7 @@ class LabelController extends Controller
      */
     public function edit(Label $label)
     {
-        //
+        return view('label.edit', compact('label'));
     }
 
     /**
@@ -69,7 +76,21 @@ class LabelController extends Controller
      */
     public function update(Request $request, Label $label)
     {
-        //
+        $id = $label->id;
+        $label = Label::find($id);
+
+        abort_unless($label, 404);
+
+        $validated = $this->validate($request, [
+            'name' => 'required|unique:labels|max:255',
+            'description' => 'max:500'
+        ]);
+
+        $label->fill($validated);
+        $label->save();
+
+        flash(__('flashes.labels.updated'))->success();
+        return redirect()->route('labels.index');
     }
 
     /**
@@ -80,6 +101,19 @@ class LabelController extends Controller
      */
     public function destroy(Label $label)
     {
-        //
+        $id = $label->id;
+        $label = Label::find($id);
+
+        abort_unless($label, 404);
+
+        if ($label->tasks()->exists()) {
+            flash(__('flashes.labels.delete.error'))->error();
+            return back();
+        }
+
+        $label->delete();
+
+        flash(__('flashes.labels.deleted'))->success();
+        return redirect()->route('labels.index');
     }
 }
