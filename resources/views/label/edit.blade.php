@@ -13,6 +13,6 @@
         @error('description')
             <div class="alert alert-danger mt-3 mb-0">{{ $message }}</div>
         @enderror
-        {{ Form::submit(__('views.label.create.buttons.create'), ['class' => 'btn btn-primary mt-3']) }}
+        {{ Form::submit(__('views.label.edit.buttons.update'), ['class' => 'btn btn-primary mt-3']) }}
     {{ Form::close() }}
 @endsection

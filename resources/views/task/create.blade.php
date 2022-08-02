@@ -11,7 +11,7 @@
         @enderror
 
         {{ Form::label('description', __('views.task.create.labels.description')) }}
-        {{ Form::text('description  ', null, ['class' => 'form-control form-control-lg', 'cols' => 50, 'rows' => 10]) }}
+        {{ Form::text('description', null, ['class' => 'form-control form-control-lg', 'cols' => 50, 'rows' => 10]) }}
 
         {{ Form::label('status_id', __('views.task.create.labels.status_id')) }}
         {{ Form::select('status_id', $taskStatuses->pluck('name', 'id'), null, ['class' => 'form-control',  'placeholder' => '----------'] )}}

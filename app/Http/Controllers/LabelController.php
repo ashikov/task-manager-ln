@@ -43,10 +43,16 @@ class LabelController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $this->validate($request, [
-            'name' => 'required|unique:labels|max:255',
-            'description' => 'max:500'
-        ]);
+        $validated = $this->validate(
+            $request,
+            [
+                'name' => 'required|unique:labels|max:255',
+                'description' => 'max:500'
+            ],
+            [
+                'name.unique' => __('validation.label.unique')
+            ]
+        );
 
         $label = new Label();
         $label->fill($validated);
@@ -81,10 +87,16 @@ class LabelController extends Controller
 
         abort_unless($label, 404);
 
-        $validated = $this->validate($request, [
-            'name' => 'required|unique:labels|max:255',
-            'description' => 'max:500'
-        ]);
+        $validated = $this->validate(
+            $request,
+            [
+                'name' => 'required|unique:labels|max:255',
+                'description' => 'max:500'
+            ],
+            [
+                'name.unique' => __('validation.label.unique')
+            ]
+        );
 
         $label->fill($validated);
         $label->save();

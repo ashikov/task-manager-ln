@@ -72,12 +72,18 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $this->validate($request, [
-            'name' => 'required|unique:tasks',
-            'status_id' => 'required|exists:task_statuses,id',
-            'description' => 'nullable|string',
-            'assigned_to_id' => 'nullable|integer',
-        ]);
+        $validated = $this->validate(
+            $request,
+            [
+                'name' => 'required|unique:tasks',
+                'status_id' => 'required|exists:task_statuses,id',
+                'description' => 'nullable|string',
+                'assigned_to_id' => 'nullable|integer',
+            ],
+            [
+                'name.unique' => __('validation.task.unique')
+            ]
+        );
 
         $currentUser = Auth::user();
 
@@ -122,12 +128,18 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
-        $validated = $this->validate($request, [
-            'name' => 'required|unique:tasks,name,' . $task->id,
-            'description' => 'nullable|string',
-            'assigned_to_id' => 'nullable|integer',
-            'status_id' => 'required|integer',
-        ]);
+        $validated = $this->validate(
+            $request,
+            [
+                'name' => 'required|unique:tasks,name,' . $task->id,
+                'description' => 'nullable|string',
+                'assigned_to_id' => 'nullable|integer',
+                'status_id' => 'required|integer',
+            ],
+            [
+                'name.unique' => __('validation.task.unique')
+            ]
+        );
 
         $labels = collect($request->input('labels'))
             ->filter(fn($label) => $label !== null);

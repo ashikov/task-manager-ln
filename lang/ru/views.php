@@ -2,7 +2,7 @@
 
 return [
     'home' => [
-        'header' => 'Привет!',
+        'header' => 'Привет от Хекслета!',
         'description' => 'Это простой менеджер задач на Laravel',
         'learn_more' => 'Нажми меня'
     ],
@@ -50,7 +50,13 @@ return [
             'create_button' => 'Создать задачу',
             'status' => 'Статус',
             'creator' => 'Автор',
-            'assigned_to' => 'Исполнитель'
+            'assigned_to' => 'Исполнитель',
+            'placeholders' => [
+                'status_id' => 'Статус',
+                'created_by_id' => 'Автор',
+                'assigned_to_id' => 'Исполнитель'
+            ],
+            'filter_button' => 'Применить'
         ],
         'edit' => [
             'form_header' => 'Изменение задачи',

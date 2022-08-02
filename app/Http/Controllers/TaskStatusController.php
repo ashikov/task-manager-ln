@@ -43,9 +43,15 @@ class TaskStatusController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $this->validate($request, [
-            'name' => 'required|unique:task_statuses|max:255'
-        ]);
+        $validated = $this->validate(
+            $request,
+            [
+                'name' => 'required|unique:task_statuses|max:255'
+            ],
+            [
+                'name.unique' => __('validation.task_status.unique')
+            ]
+        );
 
         $taskStatus = new TaskStatus();
         $taskStatus->fill($validated);
@@ -81,9 +87,15 @@ class TaskStatusController extends Controller
 
         abort_unless($taskStatus, 404);
 
-        $validated = $this->validate($request, [
-            'name' => 'required|unique:task_statuses|max:255'
-        ]);
+        $validated = $this->validate(
+            $request,
+            [
+                'name' => 'required|unique:task_statuses|max:255'
+            ],
+            [
+                'name.unique' => __('validation.task_status.unique')
+            ]
+        );
 
         $taskStatus->fill($validated);
         $taskStatus->save();
