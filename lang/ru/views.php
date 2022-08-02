@@ -86,7 +86,8 @@ return [
             'header' => 'Просмотр задачи: :name',
             'name' => 'Имя',
             'description' => 'Описание',
-            'status_id' => 'Статус'
+            'status_id' => 'Статус',
+            'labels' => 'Метки'
         ]
     ],
     'label' => [
