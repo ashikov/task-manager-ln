@@ -12,7 +12,6 @@ use App\Models\{
 
 class TaskStatusTest extends TestCase
 {
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -63,5 +62,4 @@ class TaskStatusTest extends TestCase
         $response = $this->actingAs($this->user)->delete(route('task_statuses.destroy', $taskStatus));
         $this->assertDatabaseMissing('task_statuses', ['id' => $taskStatus->id]);
     }
-
 }

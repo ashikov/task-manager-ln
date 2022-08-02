@@ -17,7 +17,6 @@ use Spatie\QueryBuilder\{
 
 class TaskController extends Controller
 {
-
     // public function __construct()
     // {
     //     $this->authorizeResource(Task::class);
@@ -150,7 +149,6 @@ class TaskController extends Controller
         flash(__('flashes.tasks.updated'))->success();
 
         return redirect()->route('tasks.index');
-
     }
 
     /**
