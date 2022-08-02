@@ -82,7 +82,7 @@ class LabelController extends Controller
     public function update(Request $request, Label $label)
     {
         $id = $label->id;
-        $label = Label::find($id);
+        $label = Label::find($id) ?? false;
 
         abort_unless($label, 404);
 
@@ -113,7 +113,7 @@ class LabelController extends Controller
     public function destroy(Label $label)
     {
         $id = $label->id;
-        $label = Label::find($id);
+        $label = Label::find($id) ?? false;
 
         abort_unless($label, 404);
 
