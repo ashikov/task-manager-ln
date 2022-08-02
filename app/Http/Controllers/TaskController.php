@@ -101,6 +101,11 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+        abort_unless(
+            (bool) Task::find($task->id),
+            404
+        );
+
         return view('task.show', compact('task'));
     }
 
@@ -112,6 +117,11 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
+        abort_unless(
+            (bool) Task::find($task->id),
+            404
+        );
+
         $taskStatuses = TaskStatus::all();
         $users = User::all();
         $labels = Label::all();
@@ -127,6 +137,11 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
+        abort_unless(
+            (bool) Task::find($task->id),
+            404
+        );
+
         $validated = $this->validate(
             $request,
             [
@@ -159,10 +174,10 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        $id = $task->id;
-        $task = Task::find($id);
-
-        abort_unless($task, 404);
+        abort_unless(
+            (bool) Task::find($task->id),
+            404
+        );
 
         $task->labels()->detach();
         $task->delete();

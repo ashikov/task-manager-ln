@@ -13,10 +13,13 @@ use App\Models\{
 
 class TaskTest extends TestCase
 {
+    private User $user;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->user = User::factory()->create();
+        Task::factory()->count(10)->create();
     }
 
     public function testIndex(): void
@@ -44,23 +47,23 @@ class TaskTest extends TestCase
         $response = $this->actingAs($this->user)->post(route('tasks.store', $data));
         $response->assertRedirect();
 
-        $this->assertDatabaseHas('tasks', $data);
+        $this->assertDatabaseHas('tasks', (array) $data);
     }
 
     public function testUpdate(): void
     {
         $task = Task::factory()->create();
         $data = Task::factory()->make()->only(['name', 'description', 'status_id', 'assigned_to_id']);
-        $response = $this->actingAs($this->user)->patch(route('tasks.update', $task), $data);
+        $response = $this->actingAs($this->user)->patch(route('tasks.update', $task), (array) $data);
         $response->assertRedirect();
 
-        $this->assertDatabaseHas('tasks', $data);
+        $this->assertDatabaseHas('tasks', (array) $data);
     }
 
     public function testDelete(): void
     {
         $task = Task::factory()->create();
         $response = $this->actingAs($this->user)->delete(route('tasks.destroy', $task));
-        $this->assertDatabaseMissing('tasks', ['id' => $task->id]);
+        $this->assertDatabaseMissing('tasks', ['id' => (array) $task['id']]);
     }
 }

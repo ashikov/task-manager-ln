@@ -12,10 +12,13 @@ use App\Models\{
 
 class TaskStatusTest extends TestCase
 {
+    private User $user;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->user = User::factory()->create();
+        TaskStatus::factory()->count(10)->create();
     }
 
     public function testIndex(): void
@@ -43,23 +46,23 @@ class TaskStatusTest extends TestCase
         $response = $this->actingAs($this->user)->post(route('task_statuses.store', $data));
         $response->assertRedirect();
 
-        $this->assertDatabaseHas('task_statuses', $data);
+        $this->assertDatabaseHas('task_statuses', (array) $data);
     }
 
     public function testUpdate(): void
     {
         $taskStatus = TaskStatus::factory()->create();
         $data = TaskStatus::factory()->make()->only('name');
-        $response = $this->actingAs($this->user)->patch(route('task_statuses.update', $taskStatus), $data);
+        $response = $this->actingAs($this->user)->patch(route('task_statuses.update', $taskStatus), (array) $data);
         $response->assertRedirect();
 
-        $this->assertDatabaseHas('task_statuses', $data);
+        $this->assertDatabaseHas('task_statuses', (array) $data);
     }
 
     public function testDelete(): void
     {
         $taskStatus = TaskStatus::factory()->create();
         $response = $this->actingAs($this->user)->delete(route('task_statuses.destroy', $taskStatus));
-        $this->assertDatabaseMissing('task_statuses', ['id' => $taskStatus->id]);
+        $this->assertDatabaseMissing('task_statuses', ['id' => (array) $taskStatus['id']]);
     }
 }

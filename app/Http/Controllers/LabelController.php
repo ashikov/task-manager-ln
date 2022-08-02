@@ -69,6 +69,11 @@ class LabelController extends Controller
      */
     public function edit(Label $label)
     {
+        abort_unless(
+            (bool) Label::find($label->id),
+            404
+        );
+
         return view('label.edit', compact('label'));
     }
 
@@ -81,10 +86,10 @@ class LabelController extends Controller
      */
     public function update(Request $request, Label $label)
     {
-        $id = $label->id;
-        $label = Label::find($id) ?? false;
-
-        abort_unless($label, 404);
+        abort_unless(
+            (bool) Label::find($label->id),
+            404
+        );
 
         $validated = $this->validate(
             $request,
@@ -112,10 +117,10 @@ class LabelController extends Controller
      */
     public function destroy(Label $label)
     {
-        $id = $label->id;
-        $label = Label::find($id) ?? false;
-
-        abort_unless($label, 404);
+        abort_unless(
+            (bool) Label::find($label->id),
+            404
+        );
 
         if ($label->tasks()->exists()) {
             flash(__('flashes.labels.delete.error'))->error();

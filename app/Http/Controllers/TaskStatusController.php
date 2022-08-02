@@ -69,6 +69,11 @@ class TaskStatusController extends Controller
      */
     public function edit(TaskStatus $taskStatus)
     {
+        abort_unless(
+            (bool) TaskStatus::find($taskStatus->id),
+            404
+        );
+
         return view('task_status.edit', compact('taskStatus'));
     }
 
@@ -81,10 +86,10 @@ class TaskStatusController extends Controller
      */
     public function update(Request $request, TaskStatus $taskStatus)
     {
-        $id = $taskStatus->id;
-        $taskStatus = TaskStatus::find($id);
-
-        abort_unless($taskStatus, 404);
+        abort_unless(
+            (bool) TaskStatus::find($taskStatus->id),
+            404
+        );
 
         $validated = $this->validate(
             $request,
@@ -111,10 +116,10 @@ class TaskStatusController extends Controller
      */
     public function destroy(TaskStatus $taskStatus)
     {
-        $id = $taskStatus->id;
-        $taskStatus = TaskStatus::find($id);
-
-        abort_unless($taskStatus, 404);
+        abort_unless(
+            (bool) TaskStatus::find($taskStatus->id),
+            404
+        );
 
         if ($taskStatus->tasks()->exists()) {
             flash(__('flashes.statuses.delete.error'))->error();

@@ -12,10 +12,13 @@ use App\Models\{
 
 class LabelTest extends TestCase
 {
+    private User $user;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->user = User::factory()->create();
+        Label::factory()->count(10)->create();
     }
 
     public function testIndex(): void
@@ -43,23 +46,23 @@ class LabelTest extends TestCase
         $response = $this->actingAs($this->user)->post(route('labels.store', $data));
         $response->assertRedirect();
 
-        $this->assertDatabaseHas('labels', $data);
+        $this->assertDatabaseHas('labels', (array) $data);
     }
 
     public function testUpdate(): void
     {
         $label = Label::factory()->create();
         $data = Label::factory()->make()->only('name', 'description');
-        $response = $this->actingAs($this->user)->patch(route('labels.update', $label), $data);
+        $response = $this->actingAs($this->user)->patch(route('labels.update', $label), (array) $data);
         $response->assertRedirect();
 
-        $this->assertDatabaseHas('labels', $data);
+        $this->assertDatabaseHas('labels', (array) $data);
     }
 
     public function testDelete(): void
     {
         $label = Label::factory()->create();
         $response = $this->actingAs($this->user)->delete(route('labels.destroy', $label));
-        $this->assertDatabaseMissing('labels', ['id' => $label->id]);
+        $this->assertDatabaseMissing('labels', ['id' => (array) $label['id']]);
     }
 }
