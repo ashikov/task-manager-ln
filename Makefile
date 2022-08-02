@@ -37,3 +37,6 @@ test-coverage:
 
 test:
 	php artisan test
+
+watch:
+	npm run dev
