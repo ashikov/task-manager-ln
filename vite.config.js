@@ -9,9 +9,4 @@ export default defineConfig({
             'resources/js/app.js',
         ]),
     ],
-    // resolve: {
-    //     alias: {
-    //         '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
-    //     }
-    // },
 });
