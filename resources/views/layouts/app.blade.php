@@ -19,75 +19,64 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ route('home') }}">
-                    @lang('layouts.app.app_name')
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        <header class="fixed w-full">
+            <nav class="bg-white border-gray-200 py-2.5 dark:bg-gray-900">
+                <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
+                    <a href="{{ route('home') }}" class="flex items-center">
+                        <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">@lang('layouts.app.app_name')</span>
+                    </a>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item">
-                            <a class="nav-link " href="{{ route('tasks.index') }}">
-                                @lang('layouts.app.tasks')
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="{{ route('task_statuses.index') }}">
-                                @lang('layouts.app.task_statuses')
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="{{ route('labels.index') }}">
-                                @lang('layouts.app.labels')
-                            </a>
-                        </li>
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
+                    <div class="flex items-center lg:order-2">
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('layouts.app.login') }}</a>
-                            </li>
+                            <a href="{{ route('login') }}" class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800 ml-2">
+                                {{ __('layouts.app.login') }}
+                            </a>
                             @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('layouts.app.register') }}</a>
-                                </li>
+                                <a href="{{ route('register') }}" class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800 ml-2">
+                                    {{ __('layouts.app.register') }}
+                                </a>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdownMenuLink" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();"
+                                class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800 ml-2">
+                                {{ __('layouts.app.logout') }}
+                            </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('layouts.app.logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                    </div>
 
-        <main class="container py-4">
+                    <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1">
+                        <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                            <li>
+                                <a href="{{ route('tasks.index') }}" class="block py-2 pl-3 pr-4 text-white bg-purple-700 rounded lg:bg-transparent lg:text-purple-700 lg:p-0 dark:text-white">
+                                    @lang('layouts.app.tasks')
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('task_statuses.index') }}" class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                                    @lang('layouts.app.task_statuses')
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('labels.index') }}" class="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                                    @lang('layouts.app.labels')
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <section class="bg-white dark:bg-gray-900">
             @include('flash::message')
             @yield('content')
-        </main>
+        </section>
     </div>
 </body>
 </html>
