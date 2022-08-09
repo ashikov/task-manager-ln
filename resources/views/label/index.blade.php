@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="grid col-span-full">
     <h1 class="mb-5">@lang('views.task_status.index.header')</h1>
 
     @can('create', App\Models\Label::class)
@@ -48,4 +49,5 @@
         @endforeach
     </table>
     {{ $labels->links() }}
+</div>
 @endsection

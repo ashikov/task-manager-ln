@@ -1,21 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="mb-5">@lang('views.task.index.header')</h1>
+<div class="grid col-span-full">
+    <h1 class="clear-both">@lang('views.task.index.header')</h1>
 
     <div>
         {{ Form::open(['route' => 'tasks.index', 'method' => 'get']) }}
-        <div class="row g-1">
-            <div class="col">
-                {{ Form::select('filter[status_id]', $taskStatusesForFilterForm, Arr::get($filterQueryString, 'status_id', ''), ['class' => 'form-select me-2', 'placeholder' => __('views.task.index.placeholders.status_id')]) }}
+        <div>
+            <div>
+                {{ Form::select('filter[status_id]', $taskStatusesForFilterForm, Arr::get($filterQueryString, 'status_id', ''), ['class' => '', 'placeholder' => __('views.task.index.placeholders.status_id')]) }}
             </div>
-            <div class="col">
-                {{ Form::select('filter[created_by_id]', $usersForFilterForm, Arr::get($filterQueryString, 'created_by_id', ''), ['class' => 'form-select me-2', 'placeholder' => __('views.task.index.placeholders.created_by_id')]) }}
+            <div>
+                {{ Form::select('filter[created_by_id]', $usersForFilterForm, Arr::get($filterQueryString, 'created_by_id', ''), ['class' => '', 'placeholder' => __('views.task.index.placeholders.created_by_id')]) }}
             </div>
-            <div class="col">
-                {{ Form::select('filter[assigned_to_id]', $usersForFilterForm, Arr::get($filterQueryString, 'assigned_to_id', ''), ['class' => 'form-select me-2', 'placeholder' => __('views.task.index.placeholders.assigned_to_id')]) }}
+            <div>
+                {{ Form::select('filter[assigned_to_id]', $usersForFilterForm, Arr::get($filterQueryString, 'assigned_to_id', ''), ['class' => '', 'placeholder' => __('views.task.index.placeholders.assigned_to_id')]) }}
             </div>
-            <div class="col">
+            <div>
                 {{ Form::submit(__('views.task.index.filter_button'), ['class' => 'btn btn-outline-primary me-2']) }}
             </div>
             {{ Form::close() }}
@@ -23,12 +24,12 @@
     </div>
 
     @can('create', App\Models\Task::class)
-        <a href="{{ route('tasks.create') }}" class="btn btn-primary">
+        <a href="{{ route('tasks.create') }}">
             @lang('views.task.index.create_button')
         </a>
     @endcan
 
-    <table class="table mt-2">
+    <table>
         <thead>
             <tr>
                 <th>@lang('views.task.index.id')</th>
@@ -47,7 +48,7 @@
                 <td>{{ $task->id }}</td>
                 <td>{{ $task->status->name }}</td>
                 <td>
-                    <a class="text-decoration-none" href="{{ route('tasks.show', $task) }}">
+                    <a href="{{ route('tasks.show', $task) }}">
                         {{ $task->name }}
                     </a>
                 </td>
@@ -59,14 +60,13 @@
                         <a
                             data-confirm="@lang('views.task.index.delete_confirmation')"
                             data-method="delete"
-                            class="text-danger text-decoration-none"
                             href="{{ route('tasks.destroy', $task) }}"
                         >
                             @lang('views.task.index.delete')
                         </a>
                     @endcan
                     @can('update', $task)
-                        <a class="text-decoration-none" href="{{ route('tasks.edit', $task) }}">
+                        <a href="{{ route('tasks.edit', $task) }}">
                             @lang('views.task.index.edit')
                         </a>
                     @endcan
@@ -75,4 +75,5 @@
         @endforeach
     </table>
     {{ $tasks->links() }}
+</div>
 @endsection
