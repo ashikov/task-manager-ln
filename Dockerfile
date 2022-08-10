@@ -1,6 +1,6 @@
 FROM php:8.1-cli
 
-ARG user
+ARG user=tmanager
 ARG uid=1000
 ARG gid=1000
 
