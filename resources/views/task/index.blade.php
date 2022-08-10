@@ -2,22 +2,22 @@
 
 @section('content')
 <div class="grid col-span-full">
-    <h1 class="clear-both">@lang('views.task.index.header')</h1>
+    <h1 class="mb-5">@lang('views.task.index.header')</h1>
 
     <div>
-        {{ Form::open(['route' => 'tasks.index', 'method' => 'get']) }}
-        <div>
+        {{ Form::open(['route' => 'tasks.index', 'method' => 'get', 'class' => 'w-full max-w-sm']) }}
+        <div class="flex items-center mt-4">
             <div>
-                {{ Form::select('filter[status_id]', $taskStatusesForFilterForm, Arr::get($filterQueryString, 'status_id', ''), ['class' => '', 'placeholder' => __('views.task.index.placeholders.status_id')]) }}
+                {{ Form::select('filter[status_id]', $taskStatusesForFilterForm, Arr::get($filterQueryString, 'status_id', ''), ['class' => 'rounded', 'placeholder' => __('views.task.index.placeholders.status_id')]) }}
             </div>
             <div>
-                {{ Form::select('filter[created_by_id]', $usersForFilterForm, Arr::get($filterQueryString, 'created_by_id', ''), ['class' => '', 'placeholder' => __('views.task.index.placeholders.created_by_id')]) }}
+                {{ Form::select('filter[created_by_id]', $usersForFilterForm, Arr::get($filterQueryString, 'created_by_id', ''), ['class' => 'ml-2 rounded', 'placeholder' => __('views.task.index.placeholders.created_by_id')]) }}
             </div>
             <div>
-                {{ Form::select('filter[assigned_to_id]', $usersForFilterForm, Arr::get($filterQueryString, 'assigned_to_id', ''), ['class' => '', 'placeholder' => __('views.task.index.placeholders.assigned_to_id')]) }}
+                {{ Form::select('filter[assigned_to_id]', $usersForFilterForm, Arr::get($filterQueryString, 'assigned_to_id', ''), ['class' => 'ml-2 rounded', 'placeholder' => __('views.task.index.placeholders.assigned_to_id')]) }}
             </div>
             <div>
-                {{ Form::submit(__('views.task.index.filter_button'), ['class' => 'btn btn-outline-primary me-2']) }}
+                {{ Form::submit(__('views.task.index.filter_button'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2']) }}
             </div>
             {{ Form::close() }}
         </div>
