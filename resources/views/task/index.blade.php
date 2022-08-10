@@ -4,7 +4,7 @@
 <div class="grid col-span-full">
     <h1 class="mb-5">@lang('views.task.index.header')</h1>
 
-    <div class="w-full flex items-center mt-4 ">
+    <div class="w-full flex items-center">
         <div>
             {{ Form::open(['route' => 'tasks.index', 'method' => 'get', 'class' => '']) }}
             <div class="flex">
@@ -61,7 +61,7 @@
             <td>{{ $task->created_at->format('d.m.Y') }}</td>
             <td>
                 @can('delete', $task)
-                <a data-confirm="@lang('views.task.index.delete_confirmation')" data-method="delete" href="{{ route('tasks.destroy', $task) }}" class="text-red-600 hover:text-red -900">
+                <a data-confirm="@lang('views.task.index.delete_confirmation')" data-method="delete" href="{{ route('tasks.destroy', $task) }}" class="text-red-600 hover:text-red-900">
                     @lang('views.task.index.delete')
                 </a>
                 @endcan

@@ -35,7 +35,7 @@
                         <a
                             data-confirm="@lang('views.label.index.delete_confirmation')"
                             data-method="delete"
-                            class="text-red-600 hover:text-red -900"
+                            class="text-red-600 hover:text-red-900"
                             href="{{ route('labels.destroy', $label) }}"
                         >
                             @lang('views.label.index.delete')
