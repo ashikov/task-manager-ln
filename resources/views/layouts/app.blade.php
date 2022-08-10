@@ -20,7 +20,7 @@
 <body>
     <div id="app">
         <header class="fixed w-full">
-            <nav class="bg-white border-gray-200 py-2.5 dark:bg-gray-900">
+            <nav class="bg-white border-gray-200 py-2.5 dark:bg-gray-900 shadow-md">
                 <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
                     <a href="{{ route('home') }}" class="flex items-center">
                         <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">@lang('layouts.app.app_name')</span>
