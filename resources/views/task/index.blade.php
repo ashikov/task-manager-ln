@@ -29,8 +29,8 @@
         </a>
     @endcan
 
-    <table>
-        <thead>
+    <table class="mt-4">
+        <thead class="border-b-2 border-solid border-black text-left">
             <tr>
                 <th>@lang('views.task.index.id')</th>
                 <th>@lang('views.task.index.status')</th>
@@ -44,11 +44,11 @@
             </tr>
         </thead>
         @foreach($tasks as $task)
-            <tr>
+            <tr class="border-b border-dashed text-left">
                 <td>{{ $task->id }}</td>
                 <td>{{ $task->status->name }}</td>
                 <td>
-                    <a href="{{ route('tasks.show', $task) }}">
+                    <a  class="text-blue-600 hover:text-blue-900" href="{{ route('tasks.show', $task) }}">
                         {{ $task->name }}
                     </a>
                 </td>
@@ -74,6 +74,8 @@
             </tr>
         @endforeach
     </table>
-    {{ $tasks->links() }}
+    <div class="mt-4">
+        {{ $tasks->links() }}
+    </div>
 </div>
 @endsection
