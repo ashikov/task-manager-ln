@@ -19,7 +19,7 @@
             {{ Form::label('description', __('views.label.create.labels.description')) }}
         </div>
         <div class="mt-2">
-            {{ Form::text('description', null, ['class' => 'rounded border-gray-300 w-1/3 h-32']) }}
+            {{ Form::textarea('description', null, ['class' => 'rounded border-gray-300 w-1/3 h-32']) }}
         </div>
         @error('description')
             <div class="text-rose-600">{{ $message }}</div>
