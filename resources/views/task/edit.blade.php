@@ -12,7 +12,7 @@
             {{ Form::text('name', null, ['class' => 'rounded border-gray-300 w-1/3']) }}
         </div>
         @error('name')
-            <div class="text-red-500">{{ $message }}</div>
+            <div class="text-rose-600">{{ $message }}</div>
         @enderror
         <div class="mt-2">
             {{ Form::label('description', __('views.task.create.labels.description')) }}
@@ -27,7 +27,7 @@
             {{ Form::select('status_id', $taskStatuses->pluck('name', 'id'), null, ['class' => 'rounded border-gray-300 w-1/3',  'placeholder' => '----------'] )}}
         </div>
         @error('status_id')
-            <div class="text-red-500">{{ $message }}</div>
+            <div class="text-rose-600">{{ $message }}</div>
         @enderror
         <div class="mt-2">
             {{ Form::label('assigned_to_id', __('views.task.create.labels.assigned_to_id')) }}

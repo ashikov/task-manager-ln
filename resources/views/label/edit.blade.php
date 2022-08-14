@@ -13,7 +13,7 @@
             {{ Form::text('name', null, ['class' => 'rounded border-gray-300 w-1/3']) }}
         </div>
         @error('name')
-            <div class="alert alert-danger mt-3 mb-0">{{ $message }}</div>
+            <div class="text-rose-600">{{ $message }}</div>
         @enderror
         <div class="mt-2">
             {{ Form::label('description', __('views.label.create.labels.description')) }}
@@ -22,7 +22,7 @@
             {{ Form::text('description', null, ['class' => 'rounded border-gray-300 w-1/3 h-32']) }}
         </div>
         @error('description')
-            <div class="alert alert-danger mt-3 mb-0">{{ $message }}</div>
+            <div class="text-rose-600">{{ $message }}</div>
         @enderror
         <div class="mt-2">
             {{ Form::submit(__('views.label.create.buttons.create'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}
