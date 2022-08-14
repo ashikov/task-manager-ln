@@ -10,7 +10,7 @@ use App\Models\{
     Label
 };
 
-class LabelTest extends TestCase
+class LabelControllerTest extends TestCase
 {
     private User $user;
 
@@ -62,7 +62,7 @@ class LabelTest extends TestCase
     public function testDelete(): void
     {
         $label = Label::factory()->create();
-        $response = $this->actingAs($this->user)->delete(route('labels.destroy', $label));
+        $this->actingAs($this->user)->delete(route('labels.destroy', $label));
         $this->assertDatabaseMissing('labels', ['id' => (array) $label['id']]);
     }
 }

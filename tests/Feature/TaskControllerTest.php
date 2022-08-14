@@ -7,11 +7,10 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\{
     User,
-    Task,
-    TaskStatus
+    Task
 };
 
-class TaskTest extends TestCase
+class TaskControllerTest extends TestCase
 {
     private User $user;
 
@@ -63,7 +62,7 @@ class TaskTest extends TestCase
     public function testDelete(): void
     {
         $task = Task::factory()->create();
-        $response = $this->actingAs($this->user)->delete(route('tasks.destroy', $task));
+        $this->actingAs($this->user)->delete(route('tasks.destroy', $task));
         $this->assertDatabaseMissing('tasks', ['id' => (array) $task['id']]);
     }
 }

@@ -21,15 +21,12 @@ class TaskFactory extends Factory
     public function definition()
     {
 
-        $statusId = TaskStatus::inRandomOrder()->first()->id;
-        $createdById = User::inRandomOrder()->first()->id;
-        $assignedToId = User::inRandomOrder()->first()->id;
         return [
             'name' => fake()->words(2, true),
             'description' => fake()->sentence(),
-            'status_id' => $statusId,
-            'created_by_id' => $createdById,
-            'assigned_to_id' => $assignedToId
+            'status_id' => TaskStatus::factory()->create()->id,
+            'created_by_id' => User::factory()->create()->id,
+            'assigned_to_id' => User::factory()->create()->id
         ];
     }
 }

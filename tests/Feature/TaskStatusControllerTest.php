@@ -10,7 +10,7 @@ use App\Models\{
     TaskStatus
 };
 
-class TaskStatusTest extends TestCase
+class TaskStatusControllerTest extends TestCase
 {
     private User $user;
 
@@ -62,7 +62,7 @@ class TaskStatusTest extends TestCase
     public function testDelete(): void
     {
         $taskStatus = TaskStatus::factory()->create();
-        $response = $this->actingAs($this->user)->delete(route('task_statuses.destroy', $taskStatus));
+        $this->actingAs($this->user)->delete(route('task_statuses.destroy', $taskStatus));
         $this->assertDatabaseMissing('task_statuses', ['id' => (array) $taskStatus['id']]);
     }
 }
