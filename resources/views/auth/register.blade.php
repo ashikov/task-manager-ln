@@ -6,6 +6,8 @@
             </a>
         </x-slot> -->
 
+        <h2 class="text-center"><a href="{{ route('home') }}">@lang('layouts.app.app_name')</a></h2>
+
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
