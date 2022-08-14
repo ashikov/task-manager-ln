@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="grid col-span-full">
-    <h1 class="mb-5">@lang('views.task_status.index.header')</h1>
+    <h1 class="mb-5">@lang('views.label.index.header')</h1>
 
     <div>
         @can('create', App\Models\Label::class)
