@@ -29,7 +29,7 @@ class TaskPolicy
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Task $task)
+    public function view(?User $user, Task $task)
     {
         return true;
     }

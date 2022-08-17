@@ -17,10 +17,10 @@ use Spatie\QueryBuilder\{
 
 class TaskController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(Task::class);
-    // }
+    public function __construct()
+    {
+        $this->authorizeResource(Task::class);
+    }
 
     /**
      * Display a listing of the resource.
@@ -37,6 +37,7 @@ class TaskController extends Controller
                 AllowedFilter::exact('created_by_id'),
                 AllowedFilter::exact('assigned_to_id'),
             ])
+            ->orderBy('id')
             ->paginate(10);
 
         $taskStatusesForFilterForm = TaskStatus::pluck('name', 'id');

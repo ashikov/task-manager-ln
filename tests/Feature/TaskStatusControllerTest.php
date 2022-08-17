@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\{
     User,
@@ -44,6 +42,7 @@ class TaskStatusControllerTest extends TestCase
     {
         $data = TaskStatus::factory()->make()->only('name');
         $response = $this->actingAs($this->user)->post(route('task_statuses.store', $data));
+        $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 
         $this->assertDatabaseHas('task_statuses', (array) $data);
@@ -54,6 +53,7 @@ class TaskStatusControllerTest extends TestCase
         $taskStatus = TaskStatus::factory()->create();
         $data = TaskStatus::factory()->make()->only('name');
         $response = $this->actingAs($this->user)->patch(route('task_statuses.update', $taskStatus), (array) $data);
+        $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 
         $this->assertDatabaseHas('task_statuses', (array) $data);
@@ -62,7 +62,10 @@ class TaskStatusControllerTest extends TestCase
     public function testDelete(): void
     {
         $taskStatus = TaskStatus::factory()->create();
-        $this->actingAs($this->user)->delete(route('task_statuses.destroy', $taskStatus));
+        $response = $this->actingAs($this->user)->delete(route('task_statuses.destroy', $taskStatus));
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect();
+
         $this->assertDatabaseMissing('task_statuses', ['id' => (array) $taskStatus['id']]);
     }
 }

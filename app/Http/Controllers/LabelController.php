@@ -19,7 +19,7 @@ class LabelController extends Controller
      */
     public function index()
     {
-        $labels = Label::paginate(10);
+        $labels = Label::paginate(15);
 
         return view('label.index', compact('labels'));
     }
@@ -84,7 +84,7 @@ class LabelController extends Controller
         $validated = $this->validate(
             $request,
             [
-                'name' => 'required|unique:labels|max:255',
+                'name' => 'required|unique:labels|max:255' . $label->id,
                 'description' => 'max:500'
             ],
             [

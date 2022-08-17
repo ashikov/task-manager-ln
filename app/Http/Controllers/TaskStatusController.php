@@ -84,7 +84,7 @@ class TaskStatusController extends Controller
         $validated = $this->validate(
             $request,
             [
-                'name' => 'required|unique:task_statuses|max:255'
+                'name' => 'required|unique:task_statuses|max:255' . $taskStatus->id
             ],
             [
                 'name.unique' => __('validation.task_status.unique')

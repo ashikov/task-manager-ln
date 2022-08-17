@@ -7,11 +7,11 @@
     {{ Form::model($label, ['route' => ['labels.update', $label], 'method' => 'PATCH', 'class' => 'w-50']) }}
     <div class="flex flex-col">
         <div>
-            {{ Form::label('name', __('views.label.create.labels.name')) }}
+            {{ Form::label('name', __('views.label.edit.labels.name')) }}
         </div>
         <x-forms.input-name/>
         <div class="mt-2">
-            {{ Form::label('description', __('views.label.create.labels.description')) }}
+            {{ Form::label('description', __('views.label.edit.labels.description')) }}
         </div>
         <div class="mt-2">
             {{ Form::textarea('description', null, ['class' => 'rounded border-gray-300 w-1/3 h-32']) }}
@@ -20,7 +20,7 @@
             <div class="text-rose-600">{{ $message }}</div>
         @enderror
         <div class="mt-2">
-            {{ Form::submit(__('views.label.create.buttons.create'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}
+            {{ Form::submit(__('views.label.edit.buttons.update'), ['class' => 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded']) }}
         </div>
     </div>
     {{ Form::close() }}

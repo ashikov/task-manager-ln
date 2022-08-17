@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\{
     User,
@@ -44,6 +42,7 @@ class LabelControllerTest extends TestCase
     {
         $data = Label::factory()->make()->only('name', 'description');
         $response = $this->actingAs($this->user)->post(route('labels.store', $data));
+        $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 
         $this->assertDatabaseHas('labels', (array) $data);
@@ -54,6 +53,7 @@ class LabelControllerTest extends TestCase
         $label = Label::factory()->create();
         $data = Label::factory()->make()->only('name', 'description');
         $response = $this->actingAs($this->user)->patch(route('labels.update', $label), (array) $data);
+        $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 
         $this->assertDatabaseHas('labels', (array) $data);
@@ -62,7 +62,10 @@ class LabelControllerTest extends TestCase
     public function testDelete(): void
     {
         $label = Label::factory()->create();
-        $this->actingAs($this->user)->delete(route('labels.destroy', $label));
+        $response = $this->actingAs($this->user)->delete(route('labels.destroy', $label));
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect();
+
         $this->assertDatabaseMissing('labels', ['id' => (array) $label['id']]);
     }
 }

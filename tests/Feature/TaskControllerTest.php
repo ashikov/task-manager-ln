@@ -2,8 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\{
     User,
@@ -44,6 +42,7 @@ class TaskControllerTest extends TestCase
     {
         $data = Task::factory()->make()->only(['name', 'description', 'status_id', 'assigned_to_id']);
         $response = $this->actingAs($this->user)->post(route('tasks.store', $data));
+        $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 
         $this->assertDatabaseHas('tasks', (array) $data);
@@ -54,6 +53,7 @@ class TaskControllerTest extends TestCase
         $task = Task::factory()->create();
         $data = Task::factory()->make()->only(['name', 'description', 'status_id', 'assigned_to_id']);
         $response = $this->actingAs($this->user)->patch(route('tasks.update', $task), (array) $data);
+        $response->assertSessionHasNoErrors();
         $response->assertRedirect();
 
         $this->assertDatabaseHas('tasks', (array) $data);
@@ -61,8 +61,20 @@ class TaskControllerTest extends TestCase
 
     public function testDelete(): void
     {
-        $task = Task::factory()->create();
-        $this->actingAs($this->user)->delete(route('tasks.destroy', $task));
+        $task = Task::factory()->create([
+            'created_by_id' => $this->user->id
+        ]);
+        $response = $this->actingAs($this->user)->delete(route('tasks.destroy', $task));
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect();
+
         $this->assertDatabaseMissing('tasks', ['id' => (array) $task['id']]);
+    }
+
+    public function testShow(): void
+    {
+        $task = Task::factory()->create();
+        $response = $this->get(route('tasks.show', $task));
+        $response->assertOk();
     }
 }
