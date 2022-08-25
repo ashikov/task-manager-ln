@@ -55,6 +55,5 @@ class DatabaseSeeder extends Seeder
 
             $task->labels()->attach($labels);
         });
-
     }
 }
